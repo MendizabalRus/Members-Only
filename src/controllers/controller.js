@@ -87,19 +87,20 @@ const postRegister = [
       });
     }
     try {
-        const { firstName, lastName, username, email, password } = matchedData(req);
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const register = await db.postDbRegister(
-          firstName,
-          lastName,
-          username,
-          email,
-          hashedPassword,
-        );
-        res.rediect("/");
+      const { firstName, lastName, username, email, password } =
+        matchedData(req);
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const register = await db.postDbRegister(
+        firstName,
+        lastName,
+        username,
+        email,
+        hashedPassword,
+      );
+      res.rediect("/");
     } catch (err) {
-        console.log(err);
-        next(err)
+      console.log(err);
+      next(err);
     }
   },
 ];
@@ -121,12 +122,12 @@ async function postLogIn() {
 // LOG OUT
 
 async function getLogOut(req, res, next) {
-    req.logout((err) => {
-        if (err) {
-            return next(err)
-        }
-        res.redirect("/");
-    });
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
 }
 
 // POST PAGE
@@ -157,11 +158,10 @@ async function getMember(req, res) {
 }
 
 async function postMember(req, res) {
-  const user = localsName.user;
-  console.log(user);
+  const id = req.user.id;
   const memberPassword = req.body.password;
   memberPassword === process.env.MEMBERS_PASSWORD
-    ? await db.postDbMember(user.id)
+    ? await db.postDbMember(id)
     : res.send("Incorrect guess");
 }
 
