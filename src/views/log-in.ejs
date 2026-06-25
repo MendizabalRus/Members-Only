@@ -12,13 +12,15 @@
         </header>
         <section class="main">
             <a href="/" class="backBtn">BACK</a>
-            <h1 class="headerTitle">LOG IN</h1>
+            <h1>LOG IN</h1>
             <form action="/log-in" method="POST">
                 <label>
-                    <input type="email" required>
+                    E-mail adress:
+                    <input type="email" name="email" required>
                 </label>
                 <label>
-                    <input type="password" required>
+                    Password:
+                    <input type="password" name="password" required>
                 </label>
                 <button type="submit">LOG IN</button>
             </form>

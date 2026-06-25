@@ -16,27 +16,27 @@
             <form action="/register" method="POST">
                 <label>
                     First name:
-                    <input type="text" min="1" required>
+                    <input type="text" min="1" name="firstName" required>
                 </label>
                 <label>
                     Last name:
-                    <input type="text" min="1" required>
+                    <input type="text" min="1" class="lastName" required>
                 </label>
                 <label>
                     Username:
-                    <input type="text" min="1" required>
+                    <input type="text" min="1" name="username" required>
                 </label>
                 <label>
                     E-mail adress:
-                    <input type="email" required>
+                    <input type="email" name="email" required>
                 </label>
                 <label>
                     Password:
-                    <input type="password" min="8" required>
+                    <input type="password" min="8" name="password" required>
                 </label>
                 <label>
                     Confirm password:
-                    <input type="password" min="8" required>
+                    <input type="password" min="8" name="confirmPassword" required>
                 </label>
                 <button type="submit">REGISTER</button>
             </form>

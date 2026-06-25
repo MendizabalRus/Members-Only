@@ -9,6 +9,9 @@
     <body>
         <header class="header">
             <h1 class="headerTitle"></h1>
+            <% if (locals.user) { %>
+                <a href="/log-out">LOG OUT</a>
+            <% } %>
         </header>
         <section class="posts" class="main">
             <h1 class="feed"></h1>

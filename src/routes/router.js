@@ -10,6 +10,8 @@ router.post("/register", controller.postRegister);
 router.get("/log-in", controller.getLogIn);
 router.post("/log-in", controller.postLogIn);
 
+router.get("log-out", controller.getLogOut);
+
 router.get("/post", controller.getPost);
 router.post("/post", controller.postPost);
 
