@@ -8,26 +8,48 @@
     </head>
     <body>
         <header class="header">
-            <h1 class="headerTitle"></h1>
+            <h1 class="headerTitle">MEMBERS ONLY...</h1>
+            <% if (locals.user) { %>
+                <div class="headerLeft">
+                    <div class="userInfo">
+                        <h3 class="userName"><%= user.username %></h3>
+                        <p class="userFullName"><%= user.firstname %><%= user.lastname %></p>
+                    </div>
+                    <img src="" alt="user pfp" class="userPfp">
+                </div>
+            <% } else { %>
+                <div class="headerLeft">
+                    <a href="/log-in" class="link">LOG IN</a>
+                    <a href="/register" class="link">REGISTER</a>
+                </div>
+            <% } %>
         </header>
-        <section class="main">
-            <a href="/" class="backBtn">BACK</a>
-            <h1>LOG IN</h1>
-            <form action="/log-in" method="POST">
-                <label>
-                    E-mail adress:
-                    <input type="email" name="email" required>
-                </label>
-                <label>
-                    Password:
-                    <input type="password" name="password" required>
-                </label>
-                <button type="submit">LOG IN</button>
-            </form>
-            <p>Don't have an account yet? <a href="/register" class="link">Register now!</a></p>
-        </section>
+        <div class="main">
+            <section class="sectionLeft">
+                <a href="/" class="backBtn">BACK</a>
+            </section>
+            <section class="sectionMid">
+                <h1>LOG IN</h1>
+                <form action="/log-in" method="POST">
+                    <label>
+                        E-mail adress:
+                        <input type="email" name="email" required>
+                    </label>
+                    <label>
+                        Password:
+                        <input type="password" name="password" required>
+                    </label>
+                    <button type="submit">LOG IN</button>
+                </form>
+                <p>Don't have an account yet? <a href="/register" class="link">Register now!</a></p>
+            </section>
+            <section class="sectionRight"></section>
+        </div>
         <footer class="footer">
-
+            <a href="/about">About this project...</a>
+            <% if (locals.user) { %>
+                <a href="/log-out" class="link">LOG OUT</a>
+            <% } %>
         </footer>
     </body>
 </html>

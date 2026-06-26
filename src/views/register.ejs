@@ -8,42 +8,64 @@
     </head>
     <body>
         <header class="header">
-            <h1 class="headerTitle"></h1>
+            <h1 class="headerTitle">MEMBERS ONLY...</h1>
+            <% if (locals.user) { %>
+                <div class="headerLeft">
+                    <div class="userInfo">
+                        <h3 class="userName"><%= user.username %></h3>
+                        <p class="userFullName"><%= user.firstname %><%= user.lastname %></p>
+                    </div>
+                    <img src="" alt="user pfp" class="userPfp">
+                </div>
+            <% } else { %>
+                <div class="headerLeft">
+                    <a href="/log-in" class="link">LOG IN</a>
+                    <a href="/register" class="link">REGISTER</a>
+                </div>
+            <% } %>
         </header>
-        <section class="main">
-            <a href="/" class="backBtn">BACK</a>
-            <h1>REGISTER</h1>
-            <form action="/register" method="POST">
-                <label>
-                    First name:
-                    <input type="text" min="1" name="firstName" required>
-                </label>
-                <label>
-                    Last name:
-                    <input type="text" min="1" class="lastName" required>
-                </label>
-                <label>
-                    Username:
-                    <input type="text" min="1" name="username" required>
-                </label>
-                <label>
-                    E-mail adress:
-                    <input type="email" name="email" required>
-                </label>
-                <label>
-                    Password:
-                    <input type="password" min="8" name="password" required>
-                </label>
-                <label>
-                    Confirm password:
-                    <input type="password" min="8" name="confirmPassword" required>
-                </label>
-                <button type="submit">REGISTER</button>
-            </form>
-        </section>
+        <div class="main">
+            <section class="sectionLeft">
+                <a href="/" class="backBtn">BACK</a>
+            </section>
+            <section class="sectionMid">
+                <h1>REGISTER</h1>
+                <form action="/register" method="POST">
+                    <label>
+                        First name:
+                        <input type="text" name="firstName" required>
+                    </label>
+                    <label>
+                        Last name:
+                        <input type="text" name="lastName" required>
+                    </label>
+                    <label>
+                        Username:
+                        <input type="text" name="username" required>
+                    </label>
+                    <label>
+                        E-mail adress:
+                        <input type="email" name="email" required>
+                    </label>
+                    <label>
+                        Password:
+                        <input type="password" min="8" name="password" required>
+                    </label>
+                    <label>
+                        Confirm password:
+                        <input type="password" min="8" name="confirmPassword" required>
+                    </label>
+                    <button type="submit">REGISTER</button>
+                </form>
+            </section>
+            <section class="sectionRight"></section>
+        </div>
         <p>Already have an account? <a href="/log-in" class="link">Log in!</a></p>
         <footer class="footer">
-
+            <a href="/about">About this project...</a>
+            <% if (locals.user) { %>
+                <a href="/log-out" class="link">LOG OUT</a>
+            <% } %>
         </footer>
     </body>
 </html>

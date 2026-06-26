@@ -5,9 +5,9 @@ const LocalStrategy = require("passport-local").Strategy;
 const path = require("node:path");
 const pool = require("./db/pool.js");
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
+const bcrypt = require("bcryptjs");
 
 const router = require("./routes/router.js");
-const passport = require("passport");
 
 const app = express();
 
@@ -18,9 +18,11 @@ app.use(session({ secret: "jesus", resave: false, saveUninitialized: false }));
 app.use(passport.session());
 
 passport.use(
-  new LocalStrategy(async (email, password, done) => {
+  new LocalStrategy(
+    { usernameField: "email" },
+    async (email, password, done) => {
     try {
-      const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [
+      const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [
         email,
       ]);
       const user = rows[0];
@@ -57,9 +59,9 @@ passport.deserializeUser(async (id, done) => {
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(express.static(__dirname + "../public"));
+app.use(express.static(path.join(__dirname, "../public")));
 
-app.get("/", router);
+app.use("/", router);
 
 app.listen(process.env.PORT, (err) => {
   if (err) throw err;

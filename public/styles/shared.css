@@ -1,9 +1,169 @@
-.header {}
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-.main {}
+/* 2. Remove default margin */
+*:not(dialog) {
+  margin: 0;
+}
 
-.backBtn{}
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
 
-.link{}
+body {
+  /* 4. Increase line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
 
-.footer {}
+/* 6. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+/*
+    SHARED CSS
+*/
+
+:root {
+    font-family: sans-serif;
+    --c1: rgba(255, 255, 255, 0.8);
+    --c2: rgba(0, 0, 0, 0.8);
+    --c3: rgb(10, 37, 119);
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    background-color: var(--c2);
+}
+
+/*
+    HEADER
+*/
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 20px;
+
+    border-bottom: 2px solid var(--c3);
+
+    color: var(--c2);
+}
+
+.headerLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+/*
+    MAIN
+*/
+
+.main {
+    display: flex;
+    flex: 1;
+}
+
+.sectionLeft {
+    flex: 1;
+
+    padding: 30px 50px;
+}
+
+.sectionMid {
+    flex: 1.5;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 30px 50px;
+    border-left: 2px solid var(--c3);
+    border-right: 2px solid var(--c3);
+
+    color: var(--c2);
+}
+
+.sectionRight {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+
+    padding: 30px 50px;
+}
+
+.backBtn{
+    border: 1px solid var(--c1);
+    padding: 10px;
+    border-radius: 10px;
+    color: var(--c1);
+    text-underline-offset: 2px;
+}
+
+.link{
+    color: var(--c1);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/*
+    FOOTER
+*/
+
+.footer {
+    border-top: 2px solid var(--c3);
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: 10px 20px;
+}

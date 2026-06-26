@@ -56,16 +56,16 @@ const validateRegister = [
 const validatePost = [
   body("title")
     .isLength({ min: 10, max: 100 })
-    .isEmpty()
+    .notEmpty()
     .withMessage("Title is REQUIRED!"),
-  body("body").isEmpty().withMessage("Post cannot be empty!"),
+  body("body").notEmpty().withMessage("Post cannot be empty!"),
 ];
 
 //HOME PAGE
 
 async function getAllPosts(req, res) {
   const allPosts = await db.getDbAllPosts();
-  res.render("/", {
+  res.render("index", {
     posts: allPosts,
     user: req.user,
   });
@@ -87,8 +87,7 @@ const postRegister = [
       });
     }
     try {
-      const { firstName, lastName, username, email, password } =
-        matchedData(req);
+      const { firstName, lastName, username, email, password } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
       const register = await db.postDbRegister(
         firstName,
@@ -97,7 +96,7 @@ const postRegister = [
         email,
         hashedPassword,
       );
-      res.rediect("/");
+      res.redirect("/");
     } catch (err) {
       console.log(err);
       next(err);
@@ -111,13 +110,11 @@ async function getLogIn(req, res) {
   res.render("log-in");
 }
 
-async function postLogIn() {
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/log-in",
-    failureMessage: true,
-  });
-}
+const postLogIn = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/log-in",
+  failureMessage: true,
+});
 
 // LOG OUT
 
@@ -146,7 +143,8 @@ const postPost = [
       });
     }
     const { title, body } = matchedData(req);
-    const post = await db.postDbPost(title, body);
+    const userId = req.user.id;
+    const post = await db.postDbPost(title, body, userId);
     res.redirect("/");
   },
 ];

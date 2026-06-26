@@ -3,35 +3,54 @@
     <head>
         <meta charset="UTF-8">
         <title>MEMBERS ONLY: HOME</title>
-        <link rel="stylesheet" href="styles/index.css" type="text/css">
-        <link rel="stylesheet" href="styles/shared.css" type="text/css">
+        <link rel="stylesheet" href="/styles/shared.css" type="text/css">
+        <link rel="stylesheet" href="/styles/index.css" type="text/css">
     </head>
     <body>
         <header class="header">
-            <h1 class="headerTitle"></h1>
+            <h1 class="headerTitle">MEMBERS ONLY...</h1>
             <% if (locals.user) { %>
-                <a href="/log-out">LOG OUT</a>
+                <div class="headerLeft">
+                    <div class="userInfo">
+                        <h3 class="userName"><%= user.username %></h3>
+                        <p class="userFullName"><%= user.firstname %><%= user.lastname %></p>
+                    </div>
+                    <img src="" alt="user pfp" class="userPfp">
+                </div>
+            <% } else { %>
+                <div class="headerLeft">
+                    <a href="/log-in" class="link">LOG IN</a>
+                    <a href="/register" class="link">REGISTER</a>
+                </div>
             <% } %>
         </header>
-        <section class="posts" class="main">
-            <h1 class="feed"></h1>
-            <hr>
-            <% posts.forEach(post => { %>
-                <div class="post">
-                    <img src="" alt="" class="profilePic">
-                    <div class="profileInfo">
-                        <h3 class="profileUsername"></h3>
-                        <p class="profileFullName"></p>
+        <div class="main">
+            <section class="sectionLeft"></section>
+            <section class="sectionMid">
+                <h1 class="feedTitle">FEED</h1>
+                <% posts.forEach(post => { %>
+                    <div class="post">
+                        <div class="author">
+                            <img src="" alt="author pfp" class="authorPfp">
+                            <div class="authorInfo">
+                                <h3 class="authorUsername"><%= post.username %></h3>
+                                <p class="authorFullName"><%= post.firstname %> <%= post.lastname %></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <h2 class="postTitle"><%= post.title %></h2>
+                        <p class="postBody"><%= post.body %></p>
                     </div>
-                    <hr>
-                    <h2 class="postTitle"></h2>
-                    <p class="postBody"></p>
-                </div>
-            <% }) %>
-        </section>
+                <% }) %>
+            </section>
+            <section class="sectionRight">
+                <a href="/post" class="button">+</a>
+                <a href="/member" class="button">M</a>
+            </section>
+        </div>
         <footer class="footer">
-            <a href="" class="footerLink">TERMS & CONDITIONS</a>
-            <a href="" class="footerLink">PRIVACY POLICY</a>
+            <a href="/about" class="link">About this project...</a>
+            <a href="/log-out" class="link">LOG OUT</a>
         </footer>
     </body>
 </html>
