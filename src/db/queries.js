@@ -18,7 +18,7 @@ async function postDbPost(title, body, userId) {
 }
 
 async function postDbMember(id) {
-  await pool.query("UPDATE FROM users SET is_member = true WEHRE id = $1", [
+  await pool.query("UPDATE users SET is_member = true WHERE id = $1", [
     id,
   ]);
 }

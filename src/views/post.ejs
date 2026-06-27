@@ -29,13 +29,15 @@
                 <a href="/" class="backBtn">BACK</a>
             </section>
             <section class="sectionMid">
-                <h1>POST</h1>
-                <form action="/post" method="POST">
+                <h1 class="sectionMidTitle">POST</h1>
+                <hr>
+                <form action="/post" method="POST" class="postForm">
                     <label>
-                        Title:
+                        Title
                         <input type="text" min="10" max="100" name="title" placeholder="A brief eye-catching phrase to attract readers" required>
                     </label>
                     <label>
+                        Body
                         <input type="text" name="body" placeholder="Tell the world a story!" required>
                     </label>
                     <button type="submit">POST</button>

@@ -74,7 +74,9 @@ async function getAllPosts(req, res) {
 //REGISTER PAGE
 
 async function getRegister(req, res) {
-  res.render("register");
+  res.render("register", {
+    user: req.user,
+  });
 }
 
 const postRegister = [
@@ -107,7 +109,9 @@ const postRegister = [
 //LOG-IN PAGE
 
 async function getLogIn(req, res) {
-  res.render("log-in");
+  res.render("log-in", {
+    user: req.user,
+  });
 }
 
 const postLogIn = passport.authenticate("local", {
@@ -130,7 +134,9 @@ async function getLogOut(req, res, next) {
 // POST PAGE
 
 async function getPost(req, res) {
-  res.render("post");
+  res.render("post", {
+    user: req.user,
+  });
 }
 
 const postPost = [
@@ -152,12 +158,14 @@ const postPost = [
 // MEMBER PAGE
 
 async function getMember(req, res) {
-  res.render("member");
+  res.render("member", {
+    user: req.user,
+  });
 }
 
 async function postMember(req, res) {
   const id = req.user.id;
-  const memberPassword = req.body.password;
+  const memberPassword = req.body.memberPassword;
   memberPassword === process.env.MEMBERS_PASSWORD
     ? await db.postDbMember(id)
     : res.send("Incorrect guess");

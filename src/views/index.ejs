@@ -27,7 +27,8 @@
         <div class="main">
             <section class="sectionLeft"></section>
             <section class="sectionMid">
-                <h1 class="feedTitle">FEED</h1>
+                <h1 class="sectionMidTitle">FEED</h1>
+                <hr>
                 <% posts.forEach(post => { %>
                     <div class="post">
                         <div class="author">
@@ -50,7 +51,9 @@
         </div>
         <footer class="footer">
             <a href="/about" class="link">About this project...</a>
-            <a href="/log-out" class="link">LOG OUT</a>
+            <% if (locals.user) { %>
+                <a href="/log-out" class="link">LOG OUT</a>
+            <% } %>
         </footer>
     </body>
 </html>
