@@ -15,6 +15,8 @@ router.get("/log-out", controller.getLogOut);
 router.get("/post", controller.getPost);
 router.post("/post", controller.postPost);
 
+router.post("/delete-post", controller.postDeletePost);
+
 router.get("/member", controller.getMember)
 router.post("/member", controller.postMember)
 

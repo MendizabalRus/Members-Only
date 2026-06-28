@@ -35,20 +35,28 @@
                 <hr>
                 <% posts.forEach(post => { %>
                     <div class="post">
-                        <div class="author">
-                            <img src="/assets/pfp.svg" alt="author pfp" class="authorPfp">
-                            <div class="authorInfo">
-                                <% if (locals.user && locals.user.is_member) { %>
-                                    <h3 class="authorUsername"><%= post.username %></h3>
-                                <% } else { %>
-                                    <h3 class="authorUsername">*****</h3>
-                                <% } %>
-                                <% if (locals.user && locals.user.is_member) { %>
-                                    <p class="authorFullName"><%= post.firstname %><%= post.lastname %> </p>
-                                <% } else { %>
-                                    <p class="authorFullName">***** *****</p>
-                                <% } %>
+                        <div class="postTop">
+                            <div class="author">
+                                <img src="/assets/pfp.svg" alt="author pfp" class="authorPfp">
+                                <div class="authorInfo">
+                                    <% if (locals.user && locals.user.is_member) { %>
+                                        <h3 class="authorUsername"><%= post.username %></h3>
+                                    <% } else { %>
+                                        <h3 class="authorUsername">*****</h3>
+                                    <% } %>
+                                    <% if (locals.user && locals.user.is_member) { %>
+                                        <p class="authorFullName"><%= post.firstname %><%= post.lastname %> </p>
+                                    <% } else { %>
+                                        <p class="authorFullName">***** *****</p>
+                                    <% } %>
+                                </div>
                             </div>
+                            <% if (locals.user && locals.user.is_admin) { %>
+                                <form action="/delete-post" method="POST" class="deleteForm">
+                                    <input type="hidden" name="postId" value="<%= post.id %>">
+                                    <button type="submit" class="deleteBtn"><img src="/assets/delete.svg" alt="delete post button" class="deleteSvg"></button>
+                                </form>
+                            <% } %>
                         </div>
                         <hr>
                         <h2 class="postTitle"><%= post.title %></h2>

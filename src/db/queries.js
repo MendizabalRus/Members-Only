@@ -17,6 +17,10 @@ async function postDbPost(title, body, userId) {
     await pool.query("INSERT INTO posts (title, body, user_id) VALUES ($1, $2, $3)", [title, body, userId])
 }
 
+async function postDbDeletePost(id) {
+  await pool.query("DELETE FROM posts WHERE id = $1", [id]);
+}
+
 async function postDbMember(id) {
   console.log("is the problem in the query?");
   await pool.query("UPDATE users SET is_member = true WHERE id = $1", [id]);
@@ -26,5 +30,6 @@ module.exports = {
   getDbAllPosts,
   postDbRegister,
   postDbPost,
+  postDbDeletePost,
   postDbMember,
 };

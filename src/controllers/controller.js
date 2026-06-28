@@ -98,7 +98,7 @@ const postRegister = [
         email,
         hashedPassword,
       );
-      res.redirect("/");
+      res.redirect("/log-in");
     } catch (err) {
       console.log(err);
       next(err);
@@ -156,6 +156,14 @@ const postPost = [
   },
 ];
 
+// DELETE POST
+
+async function postDeletePost(req, res) {
+  const postId = req.body.postId;
+  await db.postDbDeletePost(postId);
+  res.redirect("/")
+}
+
 // MEMBER PAGE
 
 async function getMember(req, res) {
@@ -184,6 +192,7 @@ module.exports = {
   getLogOut,
   getPost,
   postPost,
+  postDeletePost,
   getMember,
   postMember,
 };

@@ -101,6 +101,8 @@ body {
     border-bottom: 2px solid var(--c3);
 
     color: var(--c1);
+
+    box-shadow: 0px 10px 10px var(--c3);
 }
 
 .headerLeft {
@@ -150,11 +152,23 @@ body {
 }
 
 .backBtn{
-    border: 1px solid var(--c1);
+    display: inline-block;
+
     padding: 10px;
+
+    border: 1px solid var(--c1);
     border-radius: 10px;
+
     color: var(--c1);
     text-underline-offset: 2px;
+
+    box-shadow: 3px 5px 10px rgba(255, 255, 255, 0.3);
+
+    transition: transform 200ms ease-in-out;
+}
+
+.backBtn:hover {
+    transform: translate(-3px, -3px);
 }
 
 /*
@@ -198,10 +212,36 @@ body {
     filter: contrast(0);
 }
 
+.postTop {
+    display: flex;
+    justify-content: space-between;
+}
+
 .author {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.deleteForm {
+    justify-self: flex-end;
+    align-self: flex-start;
+}
+
+.deleteBtn:hover {
+    background-color: red;
+}
+
+.deleteBtn {
+    background-color: transparent;
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+.deleteSvg {
+    width: 20px;
+    height: auto;
+    filter: contrast(0);
 }
 
 .post > hr {
@@ -210,7 +250,47 @@ body {
 }
 
 /*
-    MAIN: SECTION MIDDLE: FORMS
+    MAIN: SECTION MIDDLE: FORMS (GENERAL)
+*/
+
+.registerForm .logInForm .postForm, input {
+    padding: 5px;
+
+    border: var(--c3);
+    border-radius: 5px;
+
+    background-color: var(--c1);
+
+    color: var(--c2);
+}
+
+.registerForm .logInForm .postForm, input:active {
+    outline: none;
+    border: none;
+}
+
+.registerForm .logInForm .postForm, button[type=submit] {
+    border: 2px solid var(--c1);
+    border-radius: 5px;
+
+    color: var(--c1);
+
+    background-color: transparent;
+
+    transition: background-color 500ms ease;
+    transition: border 500ms ease;
+}
+
+.registerForm .logInForm .postForm, button[type=submit]:hover {
+    border: 2px solid var(--c3);
+
+    background-color: var(--c3);
+
+    box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.3);
+}
+
+/*
+    MAIN: SECTION MIDDLE: FORMS: REGISTER & LOG-IN
 */
 
 .sectionMid > form {
@@ -267,9 +347,9 @@ body {
     width: 40px;
     height: 40px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: inline-block;
+
+    text-align: center;
     
     border: 2px solid var(--c3);
     border-radius: 5px;
@@ -281,6 +361,13 @@ body {
     font-weight: 700;
     text-decoration: none;
 
+    box-shadow: 3px 5px 10px rgba(255, 255, 255, 0.3);
+
+    transition: transform 200ms ease;
+}
+
+.button:hover {
+    transform: translate(-2px, -2px);
 }
 
 .link{
@@ -294,10 +381,13 @@ body {
 */
 
 .footer {
-    border-top: 2px solid var(--c3);
-
+    
     display: flex;
     justify-content: space-between;
-
+    
     padding: 10px 20px;
+
+    border-top: 2px solid var(--c3);
+
+    box-shadow: 0px -10px 10px var(--c3);
 }
