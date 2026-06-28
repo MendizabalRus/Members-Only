@@ -12,7 +12,12 @@
             <% if (locals.user) { %>
                 <div class="headerLeft">
                     <div class="userInfo">
-                        <h3 class="userName"><%= user.username %></h3>
+                        <div class="userInfoTop">
+                            <h3 class="userName"><%= user.username %></h3>
+                            <% if (locals.user.is_member) { %>
+                                <img src="/assets/memberBadge.svg" alt="" class="memberBadge">
+                            <% } %>
+                        </div>
                         <p class="userFullName"><%= user.firstname %><%= user.lastname %></p>
                     </div>
                     <img src="" alt="user pfp" class="userPfp">

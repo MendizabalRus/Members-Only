@@ -18,9 +18,8 @@ async function postDbPost(title, body, userId) {
 }
 
 async function postDbMember(id) {
-  await pool.query("UPDATE users SET is_member = true WHERE id = $1", [
-    id,
-  ]);
+  console.log("is the problem in the query?");
+  await pool.query("UPDATE users SET is_member = true WHERE id = $1", [id]);
 }
 
 module.exports = {

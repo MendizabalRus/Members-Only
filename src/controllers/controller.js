@@ -143,14 +143,15 @@ const postPost = [
   validatePost,
   async (req, res) => {
     const errors = validationResult(req);
+    console.log(errors);
     if (!errors.isEmpty()) {
       return res.status(400).render("post", {
         errors: errors.array(),
       });
     }
-    const { title, body } = matchedData(req);
+    const { title, body } = req.body;
     const userId = req.user.id;
-    const post = await db.postDbPost(title, body, userId);
+    await db.postDbPost(title, body, userId);
     res.redirect("/");
   },
 ];
@@ -165,10 +166,13 @@ async function getMember(req, res) {
 
 async function postMember(req, res) {
   const id = req.user.id;
+  console.log(id)
+  console.log(req.body)
   const memberPassword = req.body.memberPassword;
   memberPassword === process.env.MEMBERS_PASSWORD
     ? await db.postDbMember(id)
     : res.send("Incorrect guess");
+  res.redirect("/")
 }
 
 module.exports = {

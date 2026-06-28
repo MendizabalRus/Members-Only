@@ -12,7 +12,12 @@
             <% if (locals.user) { %>
                 <div class="headerLeft">
                     <div class="userInfo">
-                        <h3 class="userName"><%= user.username %></h3>
+                        <div class="userInfoTop">
+                            <h3 class="userName"><%= user.username %></h3>
+                            <% if (locals.user.is_member) { %>
+                                <img src="/assets/memberBadge.svg" alt="" class="memberBadge">
+                            <% } %>
+                        </div>
                         <p class="userFullName"><%= user.firstname %><%= user.lastname %></p>
                     </div>
                     <img src="" alt="user pfp" class="userPfp">
@@ -29,12 +34,20 @@
                 <a href="/" class="backBtn">BACK</a>
             </section>
             <section class="sectionMid">
-                <h2 class="sectionMidTitle">GUESS THE SECRET PASSWORD AND BECOME A MEMBER</h2>
+                <h2 class="sectionMidTitle">
+                    <% if (locals.user.is_member){ %>
+                        YOU ARE ALREADY A MEMBER!
+                    <% } else { %>
+                        GUESS THE SECRET PASSWORD AND BECOME A MEMBER
+                    <% } %>
+                </h2>
                 <hr>
-                <form action="/member" method="POST">
-                    <input type="text" name="memberPassword" required>
-                    <button type="submit">GUESS</button>
-                </form>
+                <% if (!locals.user.is_member) { %> 
+                    <form action="/member" method="POST">
+                        <input type="text" name="memberPassword" required>
+                        <button type="submit">GUESS</button>
+                    </form>
+                <% } %>
             </section>
             <section class="sectionRight"></section>
         </div>

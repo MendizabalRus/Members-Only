@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <title>MEMBERS ONLY: HOME</title>
         <link rel="stylesheet" href="/styles/shared.css" type="text/css">
-        <link rel="stylesheet" href="/styles/index.css" type="text/css">
     </head>
     <body>
         <header class="header">
@@ -12,10 +11,15 @@
             <% if (locals.user) { %>
                 <div class="headerLeft">
                     <div class="userInfo">
-                        <h3 class="userName"><%= user.username %></h3>
+                        <div class="userInfoTop">
+                            <h3 class="userName"><%= user.username %></h3>
+                            <% if (locals.user.is_member) { %>
+                                <img src="/assets/memberBadge.svg" alt="" class="memberBadge">
+                            <% } %>
+                        </div>
                         <p class="userFullName"><%= user.firstname %><%= user.lastname %></p>
                     </div>
-                    <img src="" alt="user pfp" class="userPfp">
+                    <img src="/assets/pfp.svg" alt="user pfp" class="userPfp">
                 </div>
             <% } else { %>
                 <div class="headerLeft">
@@ -32,10 +36,18 @@
                 <% posts.forEach(post => { %>
                     <div class="post">
                         <div class="author">
-                            <img src="" alt="author pfp" class="authorPfp">
+                            <img src="/assets/pfp.svg" alt="author pfp" class="authorPfp">
                             <div class="authorInfo">
-                                <h3 class="authorUsername"><%= post.username %></h3>
-                                <p class="authorFullName"><%= post.firstname %> <%= post.lastname %></p>
+                                <% if (locals.user && locals.user.is_member) { %>
+                                    <h3 class="authorUsername"><%= post.username %></h3>
+                                <% } else { %>
+                                    <h3 class="authorUsername">*****</h3>
+                                <% } %>
+                                <% if (locals.user && locals.user.is_member) { %>
+                                    <p class="authorFullName"><%= post.firstname %><%= post.lastname %> </p>
+                                <% } else { %>
+                                    <p class="authorFullName">***** *****</p>
+                                <% } %>
                             </div>
                         </div>
                         <hr>
@@ -45,8 +57,10 @@
                 <% }) %>
             </section>
             <section class="sectionRight">
-                <a href="/post" class="button">+</a>
-                <a href="/member" class="button">M</a>
+                <% if (locals.user) { %>
+                    <a href="/post" class="button">+</a>
+                    <a href="/member" class="button">M</a>
+                <% } %>
             </section>
         </div>
         <footer class="footer">
